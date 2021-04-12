@@ -2,7 +2,7 @@ NAME1	=	push_swap
 NAME2	=	checker
 
 CFLAGS	= -Werror -Wextra -Wall -I./include
-# CFLAGS	+= -fsanitize=address
+CFLAGS	+= -fsanitize=address
 CFLAGS	+= -g3
 
 UNAME = $(shell uname)
@@ -20,7 +20,8 @@ endif
 
 INCLUDE	=	include
 
-SRC_PS	=	push_swap.c utils.c
+SRC_PS	=	push_swap.c utils.c parse_init.c visual.c list.c simple_ope.c rotate_ope.c double_ope.c \
+			check_stack.c algo.c algo_ope.c \
 
 SRC_CH	=	checker.c
 
@@ -101,7 +102,7 @@ clean :
 
 fclean : clean
 	@make fclean -C ./Printf/
-	rm -f $(NAME)
+	rm -f $(NAME1) $(NAME2)
 
 re : fclean all
 

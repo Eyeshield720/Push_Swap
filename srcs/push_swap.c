@@ -1,25 +1,14 @@
 #include <pcswap.h>
 
-int		parsing_arg(char **av)
+int		start_move(t_stack *a, t_stack *b)
 {
-	int	i;
-	int	j;
-
-	i = 1;
-	while (av[i])
+	if (!first_sort(a, b))
 	{
-		if (!av[i])
-			return (0);
-		j = 0;
-		while (av[i][j])
-		{
-			if (!atoi_spe(av[i]))
-				return (0);
-			// while (av[i][j] == ' ' && av[i][j] == '\t')
-				// j++;
-			// if (next_char())
-		}
-		i++;
+		if (a->must.bonus_v == 1)
+			print_stacks(a, b);
+		free_stack(a);
+		free_stack(b);
+		return (0);
 	}
 	return (1);
 }
@@ -28,18 +17,27 @@ int		main(int ac, char **av)
 {
 	t_stack 	a;
 	t_stack 	b;
-	t_pile		pile;
-	t_opfcmp	must;
-	t_opfcmp	to_cmp;
 
+	ft_bzero(&a, sizeof(t_stack));
+	ft_bzero(&b, sizeof(t_stack));
 	if (ac > 1)
 	{
-		if (parsing_arg(av))
+		if (!ft_strcmp(av[1], "-v"))
+			a.must.bonus_v = 1;
+		if (parsing_arg(av, a.must.bonus_v))
 		{
-			
+			if (!set_stacks(&a, av))
+			{
+				printf("Error\n");
+				return (0);
+			}
+			// print_stacks(&a, &b);
+			if (!start_move(&a, &b))
+				return (0);
+			free_stack(&a);
+			// free_stack(&b);
 		}
-		return (0);
+		return (1);
 	}
-	printf("Error\n");
 	return (0);
 }
