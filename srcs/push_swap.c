@@ -4,8 +4,7 @@ int		start_move(t_stack *a, t_stack *b)
 {
 	if (!first_sort(a, b))
 	{
-		if (a->must.bonus_v == 1)
-			print_stacks(a, b);
+		print_stacks(a, b);
 		free_stack(a);
 		free_stack(b);
 		return (0);
@@ -26,16 +25,16 @@ int		main(int ac, char **av)
 			a.must.bonus_v = 1;
 		if (parsing_arg(av, a.must.bonus_v))
 		{
-			if (!set_stacks(&a, av))
+			if (!set_stacks(&a, av, ac))
 			{
 				printf("Error\n");
 				return (0);
 			}
-			// print_stacks(&a, &b);
+			print_stacks(&a, &b);
 			if (!start_move(&a, &b))
 				return (0);
 			free_stack(&a);
-			// free_stack(&b);
+			free_stack(&b);
 		}
 		return (1);
 	}

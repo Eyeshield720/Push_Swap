@@ -14,6 +14,8 @@ void        free_stack(t_stack *random)
 {
     t_pile  *to_del;
 
+	if (random == NULL)
+		return ;
     while (random->first)
     {
         to_del = random->first->next;

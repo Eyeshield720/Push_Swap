@@ -101,7 +101,7 @@ void        rev_rotate_stb(t_stack *b);
 
 int				parsing_arg(char **av, int bonus);
 int				parsing_at_onion(const char *str);
-int				set_stacks(t_stack *a, char **arg);
+int				set_stacks(t_stack *a, char **arg, int ac);
 int				check_first_stack(t_stack *a);
 void			find_trio(t_stack *a);
 

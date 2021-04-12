@@ -25,19 +25,19 @@ static int  last_check(t_stack *a)
     return (1);
 }
 
-int         set_stacks(t_stack *a, char **arg)
+int         set_stacks(t_stack *a, char **arg, int ac)
 {
 	t_pile	*tmp;
 	int		i;
 	int		j;
 
-	i = 1 + a->must.bonus_v;
-	while (arg[i])
+	// i = 1 + a->must.bonus_v;
+	i = ac - 1;
+	while (i > (1 + a->must.bonus_v) - 1)
 	{
 		j = 0;
 		while (arg[i][j])
 		{
-            // printf(GREN"[%c]\n"RESET, arg[i][j]);
 			while ((arg[i][j] >= 9 && arg[i][j] <= 13) || arg[i][j] == ' ')
 				j++;
 			tmp = ft_create_list(ft_atoi(arg[i] + j), tmp, a->len);
@@ -55,7 +55,7 @@ int         set_stacks(t_stack *a, char **arg)
 			while ((arg[i][j] >= '0' && arg[i][j] <= '9'))
 				j++;
 		}
-		i++;
+		i--;
 	}
     if (!last_check(a))
         return (0);
