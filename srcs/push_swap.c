@@ -1,15 +1,10 @@
 #include <pcswap.h>
 
-int		start_move(t_stack *a, t_stack *b)
+void		main_algo(t_stack *a, t_stack *b)
 {
-	if (!first_sort(a, b))
-	{
-		print_stacks(a, b);
-		free_stack(a);
-		free_stack(b);
-		return (0);
-	}
-	return (1);
+	feel_worth_it(a, b);
+	worth_move(a, b);
+	reset_ope(a);
 }
 
 int		main(int ac, char **av)
@@ -30,13 +25,15 @@ int		main(int ac, char **av)
 				printf("Error\n");
 				return (0);
 			}
-			print_stacks(&a, &b);
+			// print_stacks(&a, &b);
 			if (!start_move(&a, &b))
 				return (0);
-			free_stack(&a);
-			free_stack(&b);
+			while (a.len > 3)
+				main_algo(&a, &b);
+			finisher(&a, &b);
 		}
-		return (1);
+		else
+			printf("Error\n");
 	}
 	return (0);
 }

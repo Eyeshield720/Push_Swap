@@ -7,7 +7,8 @@ static void push_b3max(t_stack *a, t_stack *b)
     i = 0;
     while (i < 2)
     {
-        if (a->first->nb == a->max || a->first->nb == a->max2 || a->first->nb == a->max3)
+        if ((a->first->nb == a->max || a->first->nb == a->max2)
+			|| ((a->first->nb == a->max3) && (a->len > 4)))
         {
             rotate_sta(a);
             printf("ra\n");
@@ -76,12 +77,33 @@ void	    short_opesta(t_stack *a, t_stack *b)
 		short_opesta2(a, b);
 }
 
+int		second_sort(t_stack *a, t_stack *b)
+{
+	if (a->len == 2)
+	{
+		sort_3max(a);
+		swap_sta(a);
+		printf("sa\n");
+		print_stacks(a, b);
+		final_sort(a, b);
+		return (0);
+	}
+	if (a->len == 3)
+	{
+		sort_3max(a);
+		short_opesta(a, b);
+		final_sort(a, b);
+		return(0);
+	}
+	return (1);
+}
+
 int		first_sort(t_stack *a, t_stack *b)
 {
 	if (!check_first_stack(a) || !begin_sort1(a, b))
 		return (0);
 	if (a->len < 2)
-		return (0);
+		return (0);	
 	if (a->len == 2)
 	{
 		if (a->first->nb > a->first->next->nb)

@@ -20,8 +20,9 @@ endif
 
 INCLUDE	=	include
 
-SRC_PS	=	push_swap.c utils.c parse_init.c visual.c list.c simple_ope.c rotate_ope.c double_ope.c \
-			check_stack.c algo.c algo_ope.c \
+SRC_PS	=	push_swap.c utils.c parse_init.c visual.c list.c check_stack.c \
+			simple_ope.c rotate_ope.c double_ope.c \
+			algo.c algo_ope.c algo_end.c algo_end1.c algo_end2.c algo_end3.c how_much.c \
 
 SRC_CH	=	checker.c
 
@@ -40,9 +41,6 @@ $(NAME2) : $(INCLUDE) $(OBJ_CH)
 $(OBJ_DIR)%.o : %.c
 	@mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
-
-# $(LIBS)	:
-# 	@make -C ./Printf/
 
 # ifeq ("$(UNAME)", Darwin)
 # run :	$(NAME)
@@ -97,12 +95,13 @@ $(OBJ_DIR)%.o : %.c
 # endif
 
 clean :
-	rm -rf $(OBJ_DIR)
+	@rm -rf $(OBJ_DIR)
 	@rm -f *_out
+	@echo "\033[38;5;129mBinary's objects has cleaned\033[0m";
 
 fclean : clean
-	@make fclean -C ./Printf/
-	rm -f $(NAME1) $(NAME2)
+	@rm -f $(NAME1) $(NAME2)
+	@echo "\033[38;5;038mBinarys has cleanned\033[0m";
 
 re : fclean all
 

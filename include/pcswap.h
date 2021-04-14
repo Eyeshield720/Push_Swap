@@ -39,17 +39,28 @@ typedef struct		s_pile
 
 typedef struct		s_opcmp
 {
-	int				index;
-	int				value;
 	int				ra;
 	int				rb;
 	int				rra;
 	int				rrb;
 	int				rr;
 	int				rrr;
-	int				nb_ope;
+
+	int				ind;
+	int				value;
 	int				check;
-	int				bonus_v;
+
+	int				tmp_ra;
+	int				tmp_rb;
+	int				tmp_rra;
+	int				tmp_rrb;
+	int				nb_ope;
+
+	uint16_t		bonus_v:1;
+	uint16_t		fb_ra:1;
+	uint16_t		fb_rr:1;
+	uint16_t		fb_rrr:1;
+	uint16_t		fb_remain:12;
 }					t_opcmp;
 
 typedef struct		s_stack
@@ -61,10 +72,9 @@ typedef struct		s_stack
 	int				min;
 	int				diff;
 	int				pos;
-	struct s_pile	*first;
 	t_opcmp			must;
 	t_opcmp			to_cmp;
-
+	struct s_pile	*first;
 }					t_stack;
 
 /*
@@ -77,9 +87,26 @@ int     	begin_sort1(t_stack *a, t_stack *b);
 void    begin_sort2(t_stack *a, t_stack *b);
 
 int			first_sort(t_stack *a, t_stack *b);
+int			second_sort(t_stack *a, t_stack *b);
 void		sort_3max(t_stack *a);
 void		manage_3max(t_stack *a, t_pile *tmp, int nb_tmp, int i);
 void	    short_opesta(t_stack *a, t_stack *b);
+int			start_move(t_stack *a, t_stack *b);
+
+void		find_maxb(t_stack *b, t_opcmp *op);
+void		find_extrstb(t_stack *a, t_stack *b);
+
+void		rev_sortb(t_stack *a, t_stack *b);
+void		final_sort(t_stack *a, t_stack *b);
+void		main_algo(t_stack *a, t_stack *b);
+void		feel_worth_it(t_stack *a, t_stack *b);
+void		plan_must(t_stack *b, t_opcmp *op);
+void		how_muchop1(t_opcmp *op);
+void		worth_it_cmp(t_stack *a, t_stack *b);
+void		worth_swapping(t_stack *a);
+void		worth_move(t_stack *a, t_stack *b);
+void		reset_ope(t_stack *a);
+void		finisher(t_stack *a, t_stack *b);
 
 void		print_stacks(t_stack *a, t_stack *b);
 
@@ -92,6 +119,10 @@ void        rotate_sta(t_stack *a);
 void        rotate_stb(t_stack *b);
 void        rev_rotate_sta(t_stack *a);
 void        rev_rotate_stb(t_stack *b);
+
+void        suit_swap(t_stack *a, t_stack *b);
+void        suit_rotate(t_stack *a, t_stack *b);
+void        suit_rot_reverse(t_stack *a, t_stack *b);
 
 /*
 **

@@ -83,3 +83,22 @@ void	sort_3max(t_stack *a)
 		}
 	}
 }
+
+int		start_move(t_stack *a, t_stack *b)
+{
+	if (!first_sort(a, b))
+	{
+		print_stacks(a, b);
+		free_stack(a);
+		free_stack(b);
+		return (0);
+	}
+	if (!second_sort(a, b))
+	{
+		print_stacks(a, b);
+		free_stack(a);
+		free_stack(b);
+		return (0);
+	}
+	return (1);
+}

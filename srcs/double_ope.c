@@ -12,7 +12,7 @@ void        suit_rotate(t_stack *a, t_stack *b)
     rotate_stb(b);
 }
 
-void        suit_reverse_rot(t_stack *a, t_stack *b)
+void        suit_rot_reverse(t_stack *a, t_stack *b)
 {
     rev_rotate_sta(a);
     rev_rotate_stb(b);
