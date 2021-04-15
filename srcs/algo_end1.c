@@ -1,17 +1,20 @@
 #include <pcswap.h>
 
-void		find_extrstb(t_stack *a, t_stack *b)
+void		find_extrstb(t_stack *b, t_opcmp *op)
 {
 	t_pile	*tmp;
 
 	tmp = b->first;
 	b->min = tmp->nb;
-	find_maxb(b, &a->must);
-	while (tmp)
+	find_maxb(b, op);
+	while (tmp->next)
 	{
 		tmp = tmp->next;
-		if (b->min < tmp->nb)
+		if (b->min > tmp->nb)
+		{
 			b->min = tmp->nb;
+			// printf(LRED"minb=[%d]-[%d]"RESET, b->min, tmp->nb);
+		}
 	}
 }
 
@@ -47,7 +50,7 @@ void			plan_must(t_stack *b, t_opcmp *op)
 	t_pile	*tmp1;
 	t_pile	*tmp2;
 
-	find_maxb(b, op);
+	find_extrstb(b, op);
 	if (op->value > b->max || op->value < b->min)
 		if (!plan_must2b(b, op))
 			return ;

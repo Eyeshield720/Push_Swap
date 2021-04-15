@@ -56,11 +56,11 @@ typedef struct		s_opcmp
 	int				tmp_rrb;
 	int				nb_ope;
 
-	uint16_t		bonus_v:1;
-	uint16_t		fb_ra:1;
-	uint16_t		fb_rr:1;
-	uint16_t		fb_rrr:1;
-	uint16_t		fb_remain:12;
+	unsigned short	bonus_v:1;
+	unsigned short	fb_ra:1;
+	unsigned short	fb_rr:1;
+	unsigned short	fb_rrr:1;
+	unsigned short	fb_remain:12;
 }					t_opcmp;
 
 typedef struct		s_stack
@@ -94,7 +94,7 @@ void	    short_opesta(t_stack *a, t_stack *b);
 int			start_move(t_stack *a, t_stack *b);
 
 void		find_maxb(t_stack *b, t_opcmp *op);
-void		find_extrstb(t_stack *a, t_stack *b);
+void		find_extrstb(t_stack *b, t_opcmp *op);
 
 void		rev_sortb(t_stack *a, t_stack *b);
 void		final_sort(t_stack *a, t_stack *b);

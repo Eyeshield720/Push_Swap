@@ -65,7 +65,7 @@ void		worth_move(t_stack *a, t_stack *b)
 			a->must.rb = 0;
 		else if (a->must.rb <= a->must.rrb && a->must.rb > 0)
 			a->must.rrb = 0;
-		else if (a->must.ra >= a->must.rra && a->must.rra > 0)
+		if (a->must.ra >= a->must.rra && a->must.rra > 0)
 			a->must.ra = 0;
 		else if (a->must.ra <= a->must.rra && a->must.ra > 0)
 			a->must.rra = 0;

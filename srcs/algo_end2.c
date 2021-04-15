@@ -54,6 +54,7 @@ void		reset_ope(t_stack *a)
 	a->must.nb_ope = 0;
 	a->must.fb_rr = 0;
 	a->must.fb_rrr = 0;	
+	a->to_cmp.ra = 0;
 }
 
 void		feel_worth_it(t_stack *a, t_stack *b)

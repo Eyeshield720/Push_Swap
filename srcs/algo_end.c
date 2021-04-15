@@ -6,11 +6,14 @@ void		find_maxb(t_stack *b, t_opcmp *op)
 
 	tmp = b->first;
 	b->max = tmp->nb;
-	while (tmp)
+	while (tmp->next)
 	{
-		if (b->max < tmp->nb)
-			b->max = tmp->nb;
 		tmp = tmp->next;
+		if (b->max < tmp->nb)
+		{
+			b->max = tmp->nb;
+			// printf(LGREN"maxb=[%d]-[%d]"RESET, b->max, tmp->nb);
+		}
 	}
 	tmp = b->first;
 	op->ind = 1;
