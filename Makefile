@@ -15,7 +15,6 @@ else
 	CC		=	clang
 	SRC_DIR =	$(shell find ./srcs -type d)
 	OBJ_DIR	=	objs_linux/
-
 endif
 
 INCLUDE	=	include
@@ -24,7 +23,8 @@ SRC_PS	=	push_swap.c utils.c parse_init.c visual.c list.c check_stack.c \
 			simple_ope.c rotate_ope.c double_ope.c \
 			algo.c algo_ope.c algo_end.c algo_end1.c algo_end2.c algo_end3.c how_much.c \
 
-SRC_CH	=	checker.c
+SRC_CH	=	checker.c utils.c parse_init.c visual.c list.c check_stack.c get_next_line.c get_next_line_utils.c \
+			simple_ope.c rotate_ope.c double_ope.c \
 
 OBJ_PS	=	$(addprefix $(OBJ_DIR),$(SRC_PS:%.c=%.o))
 OBJ_CH	=	$(addprefix $(OBJ_DIR),$(SRC_CH:%.c=%.o))

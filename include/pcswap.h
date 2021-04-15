@@ -7,6 +7,8 @@
 # include <stdlib.h>
 # include <limits.h>
 
+# define BUFFER_SIZE 64
+
 # define BLACK "\033[30m"
 # define GREY "\033[1;30m"
 # define RED "\033[31m"
@@ -77,6 +79,10 @@ typedef struct		s_stack
 	struct s_pile	*first;
 }					t_stack;
 
+typedef void	(t_op_stack)(t_stack *a);
+typedef void	(t_op_both)(t_stack *a, t_stack *b);
+
+
 /*
 **
 **		Push_Swap & Checker algo
@@ -145,7 +151,7 @@ void			find_trio(t_stack *a);
 char			*ft_itoa(int n);
 long			ft_atoi(const char *str);
 int				ft_count(int num);
-int				ft_strlen(char *str);
+int				ft_strlen(const char *str);
 void			ft_bzero(void *s, size_t n);
 int				ft_isdigit(int c);
 char			**ft_split(char const *s, char *set);
@@ -154,5 +160,10 @@ int				ft_strcmp(const char *s1, const char *s2);
 
 t_pile			*ft_create_list(int nb, t_pile *pile, int i);
 void			free_stack(t_stack *random);
+
+char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_strnew(size_t size);
+char			*ft_strcpy(char *dest, char *src);
+int				get_next_line(int const fd, char **line);
 
 #endif

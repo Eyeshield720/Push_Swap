@@ -27,19 +27,23 @@ void		swap_sta(t_stack *a)
 
 void		swap_stb(t_stack *b)
 {
-    t_pile  *tmp;
-    t_pile  *tmp2;
-    int     nb[2];
+    // t_pile  *tmp;
+    // t_pile  *tmp2;
+    // int     nb[2];
+	int		tmp;
 
     if (b == NULL || b->len < 2)
         return ;
-    tmp = b->first;
-    tmp2 = tmp->next;
-    nb[0] = tmp->nb;
-    nb[1] = tmp2->nb;
-    tmp2->nb = nb[0];
-    tmp->nb = nb[1];
-    b->first = tmp;
+	tmp = b->first->next->nb;
+    b->first->next->nb = b->first->nb;
+    b->first->nb = tmp;
+    // tmp = b->first;
+    // tmp2 = tmp->next;
+    // nb[0] = tmp->nb;
+    // nb[1] = tmp2->nb;
+    // tmp2->nb = nb[0];
+    // tmp->nb = nb[1];
+    // b->first = tmp;
 }
 
 /*
