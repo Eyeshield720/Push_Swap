@@ -1,5 +1,19 @@
 #include <pcswap.h>
 
+static void	find_mina(t_stack *a)
+{
+	t_pile	*tmp;
+
+	tmp = a->first;
+	a->min = tmp->nb;
+	while (tmp->next)
+	{
+		tmp = tmp->next;
+		if (a->min > tmp->nb)
+			a->min = tmp->nb;
+	}
+}
+
 void    begin_sort2(t_stack *a, t_stack *b)
 {
     if (a->pos < a->len / 2)
@@ -31,6 +45,7 @@ int     begin_sort1(t_stack *a, t_stack *b)
 {
     if (a->diff == 1 && a->len > 5)
     {
+		find_mina(a);
         begin_sort2(a, b);
         if (a->pos == 1)
         {
