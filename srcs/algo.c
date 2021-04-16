@@ -26,32 +26,26 @@ void	find_trio(t_stack *a)
 		}
 		tmp = tmp->next;
 	}
-	// printf("max=[%d]\nmax2=[%d]\nmax3=[%d]\n", a->max, a->max2, a->max3);
 }
 
 void	manage_3max(t_stack *a, t_pile *tmp, int nb_tmp, int i)
 {
 	int		tab[3];
 
-	// printf("max=[%d]\nmax2=[%d]\nmax3=[%d]\n", a->max, a->max2, a->max3);
 	tmp = tmp->next;
 	a->max2 = tmp->nb;
 	tmp = tmp->next;
 	a->max3 = tmp->nb;
-	// printf("max=[%d]\nmax2=[%d]\nmax3=[%d]\n", a->max, a->max2, a->max3);
 	tab[0] = a->max;
 	tab[1] = a->max2;
 	tab[2] = a->max3;
 	while (i < 2)
 	{
-		// printf("%d\n", i);
 		if (tab[i] < tab[i + 1])
 		{
-			// printf("%d=[%d]-i+1=[%d]\n", i, tab[i], tab[i+1]);
 			nb_tmp = tab[i];
 			tab[i] = tab[i + 1];
 			tab[i + 1] = nb_tmp;
-			// printf("tab=[%d]\ntab2=[%d]\ntab3=[%d]\n", tab[0], tab[1], tab[2]);
 			i = -1;
 		}
 		i++;
@@ -59,7 +53,6 @@ void	manage_3max(t_stack *a, t_pile *tmp, int nb_tmp, int i)
 	a->max = tab[0];
 	a->max2 = tab[1];
 	a->max3 = tab[2];
-	// printf("max=[%d]\nmax2=[%d]\nmax3=[%d]\n", a->max, a->max2, a->max3);
 }
 
 void	sort_3max(t_stack *a)
@@ -88,14 +81,12 @@ int		start_move(t_stack *a, t_stack *b)
 {
 	if (!first_sort(a, b))
 	{
-		print_stacks(a, b);
 		free_stack(a);
 		free_stack(b);
 		return (0);
 	}
 	if (!second_sort(a, b))
 	{
-		print_stacks(a, b);
 		free_stack(a);
 		free_stack(b);
 		return (0);

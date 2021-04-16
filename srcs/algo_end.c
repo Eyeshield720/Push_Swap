@@ -12,7 +12,6 @@ void		find_maxb(t_stack *b, t_opcmp *op)
 		if (b->max < tmp->nb)
 		{
 			b->max = tmp->nb;
-			// printf(LGREN"maxb=[%d]-[%d]"RESET, b->max, tmp->nb);
 		}
 	}
 	tmp = b->first;

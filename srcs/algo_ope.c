@@ -102,8 +102,6 @@ int		first_sort(t_stack *a, t_stack *b)
 {
 	if (!check_first_stack(a) || !begin_sort1(a, b))
 		return (0);
-	if (a->len < 2)
-		return (0);	
 	if (a->len == 2)
 	{
 		if (a->first->nb > a->first->next->nb)

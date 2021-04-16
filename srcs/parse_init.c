@@ -11,9 +11,7 @@ static int  last_check(t_stack *a)
         tmp2 = a->first;
         while (tmp2)
         {
-            // printf("[%d]=[%d]\n", tmp1->nb, tmp2->nb);
-            if ((tmp1->index != tmp2->index) &&
-                (tmp1->nb == tmp2->nb || (tmp1->nb > INT_MAX || tmp1->nb < INT_MIN)))
+            if ((tmp1->index != tmp2->index) && (tmp1->nb == tmp2->nb))
             {
                 free_stack(a);
                 return (0);
@@ -25,28 +23,41 @@ static int  last_check(t_stack *a)
     return (1);
 }
 
+static int	set_stacks2(t_stack *a, char **arg, int i, int j)
+{
+	t_pile	*tmp = NULL;
+	long	nb_tmp;
+
+	nb_tmp = ft_atoi(arg[i] + j);
+	if (nb_tmp > INT_MAX || nb_tmp < INT_MIN)
+	{
+		free_stack(a);
+		return (0);
+	}
+	tmp = ft_create_list(ft_atoi(arg[i] + j), tmp, a->len);
+	tmp->next = a->first;
+	a->first = tmp;
+	tmp = NULL;
+	a->len++;
+	return (1);
+}
+
 int         set_stacks(t_stack *a, char **arg, int ac)
 {
-	t_pile	*tmp;
 	int		i;
 	int		j;
 
-	// i = 1 + a->must.bonus_v;
 	i = ac - 1;
 	while (i > (1 + a->must.bonus_v) - 1)
 	{
 		j = 0;
 		while (arg[i][j])
 		{
-			while ((arg[i][j] >= 9 && arg[i][j] <= 13) || arg[i][j] == ' ')
+			while ((arg[i][j] >= 9 && arg[i][j] <= 13) || arg[i][j] == 32)
 				j++;
-			tmp = ft_create_list(ft_atoi(arg[i] + j), tmp, a->len);
-			tmp->next = a->first;
-			a->first = tmp;
-			tmp = NULL;
-			a->len++;
-            if (arg[i][j] == '-' || arg[i][j] == '+')
-                j++;
+			if (!set_stacks2(a, arg, i, j))
+				return (0);
+            j = (arg[i][j] == '-' || arg[i][j] == '+') ? j + 1 : 0;
             if (arg[i][j] == '-' || arg[i][j] == '+')
             {
                 free_stack(a);
@@ -57,9 +68,7 @@ int         set_stacks(t_stack *a, char **arg, int ac)
 		}
 		i--;
 	}
-    if (!last_check(a))
-        return (0);
-    return (1);
+    return (last_check(a));
 }
 
 int		    parsing_at_onion(const char *str)
@@ -69,10 +78,12 @@ int		    parsing_at_onion(const char *str)
 	i = 0;
 	while (str && str[i])
 	{
-		if (!(str[i] >= '0' && str[i] <= '9') && !(str[i] >= 9 && str[i] <= 13)
+		if (!(str[i] >= '0' && str[i] <= '9') &&
+			!(str[i] >= 9 && str[i] <= 13)
             && str[i] != ' ' && str[i] != '-' && str[i] != '+')
 			return (0);
-		if ((str[i] >= '0' && str[i] <= '9') && str[i + 1] == '-' && str[i + 1] == '+')
+		if ((str[i] >= '0' && str[i] <= '9') &&
+				str[i + 1] == '-' && str[i + 1] == '+')
 			return (0);
 		i++;
 	}
