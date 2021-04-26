@@ -6,7 +6,7 @@
 /*   By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 00:39:13 by jmercier          #+#    #+#             */
-/*   Updated: 2021/04/26 01:10:09 by jmercier         ###   ########.fr       */
+/*   Updated: 2021/04/26 19:22:43 by jmercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	push_b3max(t_stack *a, t_stack *b)
 	i = 0;
 	while (i < 2)
 		if ((a->first->nb == a->max || a->first->nb == a->max2)
-			|| ((a->first->nb == a->max3) && (a->len > 4)))
+			|| ((a->first->nb == a->max3) && (a->len > 3)))
 		{
 			rotate_sta(a);
 			printf("ra\n");
@@ -91,9 +91,12 @@ int			second_sort(t_stack *a, t_stack *b)
 	if (a->len == 2)
 	{
 		sort_3max(a);
-		swap_sta(a);
-		printf("sa\n");
-		print_stacks(a, b);
+		if (a->max < a->max2)
+		{
+			swap_sta(a);
+			printf("sa\n");
+			print_stacks(a, b);
+		}
 		final_sort(a, b);
 		return (0);
 	}

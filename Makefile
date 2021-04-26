@@ -6,7 +6,7 @@
 #    By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/26 06:11:11 by jmercier          #+#    #+#              #
-#    Updated: 2021/04/26 06:15:31 by jmercier         ###   ########.fr        #
+#    Updated: 2021/04/26 20:58:09 by jmercier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,20 +42,20 @@ OBJ_PS	=	$(addprefix $(OBJ_DIR),$(SRC_PS:%.c=%.o))
 OBJ_CH	=	$(addprefix $(OBJ_DIR),$(SRC_CH:%.c=%.o))
 vpath %.c $(SRC_DIR)
 
-all :	$(NAME1) $(NAME2)
+all :	$(NAME1) $(NAME2) run
 
 $(NAME1) : $(INCLUDE) $(OBJ_PS)
-	$(CC) $(CFLAGS) $(OBJ_PS) -o $(NAME1)
+	@$(CC) $(CFLAGS) $(OBJ_PS) -o $(NAME1)
 
 $(NAME2) : $(INCLUDE) $(OBJ_CH)
-	$(CC) $(CFLAGS) $(OBJ_CH) -o $(NAME2)
+	@$(CC) $(CFLAGS) $(OBJ_CH) -o $(NAME2)
 
 $(OBJ_DIR)%.o : %.c
 	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 ifeq ($(UNAME), Darwin)
-run :	$(NAME)
+run :	$(NAME1) $(NAME2)
 	@echo "\033c\033[38;5;034m                      ./os\`"
 	@echo "\033[38;5;034m                    \`omMMMm"
 	@echo "\033[38;5;034m                   /NMMMMM:			\033[38;5;027mOS info: \033[1;30mmacOS (X)Mojave $(shell sw_vers -productVersion) $(shell sw_vers -buildVersion)"
@@ -75,7 +75,7 @@ run :	$(NAME)
 	@echo "\033[38;5;196m  -NMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMy"
 	@echo "\033[38;5;129m   :NMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMd\`        ..|''||    .|'''.|     '||' '|'"
 	@echo "\033[38;5;129m    -mMMMMMMMMMMMMMMMMMMMMMMMMMMMMh\`        .|'    ||   ||..  '       || |"
-	@echo "\033[38;5;129m     \`yMMMMMMMMMMMMMMMMMMMMMMMMMN+          ||      ||   ''|||.        ||   \033[38;5;222mCopyright© 42-2020 by \"Shellori\""
+	@echo "\033[38;5;129m     \`yMMMMMMMMMMMMMMMMMMMMMMMMMN+          ||      ||   ''|||.        ||   \033[38;5;222mCopyright© 42-2020 by \"jmercier\""
 	@echo "\033[38;5;038m       :dMMMMMMMMMNNNNMMMMMMMMMy.           '|.     || .     '||      | ||  \033[38;5;231m Mojave "
 	@echo "\033[38;5;038m         -shdhy+:``  \`.:oyhhy+.                '||...||  |'....|'     .|   ||.\n"
 else
@@ -103,7 +103,7 @@ run	:	$(NAME)
 	@echo "\033[38;5;33m        .smMMMMMMMMMMMMMMMMMMMMMMMMh/\`		 \  / | | | '_ \| | | | '_ \| __| | | |"
 	@echo "\033[38;5;33m           -ohNMMMMMMMMMMMMMMMMds/\`		 /  \ |_| | |_) | |_| | | | | |_| |_| |"
 	@echo "\033[38;5;33m               \`-/+syyhhyyso/-\`			/_/\_\__,_|_.__/ \__,_|_| |_|\__|\__,_|	\033[38;5;231m$(shell inxi -S | grep Distro | cut -d : -f2 | tr -d LTS)"
-	@echo "     							 \033[38;5;30mCopyright© 42-2020 by Shellori\n"
+	@echo "     							 \033[38;5;30mCopyright© 42-2020 by jmercier\n"
 endif
 
 clean :
@@ -113,6 +113,14 @@ clean :
 fclean : clean
 	@rm -f $(NAME1) $(NAME2)
 	@echo "\033[38;5;038mBinarys has cleanned\033[0m";
+
+norm :
+	@echo -n "\033[1;34m"
+	@ruby ~/.norminette/norminette.rb ./include/*
+	@ruby ~/.norminette/norminette.rb ./srcs/*
+	@echo -n "\033[1;32m"
+	@echo -e 'Normed \033[38;5;222m\xF0\x9F\x91\x8C\033[1;32m\xE2\x9C\x93'
+	@echo -n "\033[0m"
 
 re : fclean all
 

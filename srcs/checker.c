@@ -6,7 +6,7 @@
 /*   By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 01:17:44 by jmercier          #+#    #+#             */
-/*   Updated: 2021/04/26 01:18:18 by jmercier         ###   ########.fr       */
+/*   Updated: 2021/04/26 19:23:04 by jmercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,9 @@ static int	read_stdin(t_stack *a, t_stack *b)
 	free(line);
 	line = NULL;
 	if (b->len == 0 && check_order(a))
-		printf("OK\n");
+		printf(GREN"OK\n"RES);
 	else
-		printf("KO\n");
+		printf(RED"KO\n"RES);
 	return (1);
 }
 
