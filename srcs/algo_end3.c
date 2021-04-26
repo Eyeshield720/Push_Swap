@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algo_end3.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/25 23:42:13 by jmercier          #+#    #+#             */
+/*   Updated: 2021/04/26 00:37:04 by jmercier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <pcswap.h>
 
 static void	worth_move3(t_stack *a, t_stack *b)
@@ -36,8 +48,7 @@ static void	worth_move2(t_stack *a, t_stack *b)
 		while (a->must.rr > 0)
 		{
 			suit_rotate(a, b);
-			printf("rr\n");
-			print_stacks(a, b);
+			printf("rr\n") ? print_stacks(a, b) : 0;
 			a->must.rr--;
 		}
 	}
@@ -49,27 +60,29 @@ static void	worth_move2(t_stack *a, t_stack *b)
 		while (a->must.rrr > 0)
 		{
 			suit_rot_reverse(a, b);
-			printf("rrr\n");
-			print_stacks(a, b);
+			printf("rrr\n") ? print_stacks(a, b) : 0;
 			a->must.rrr--;
 		}
 	}
+}
+
+static void	worth_move2b(t_stack *a)
+{
+	if (a->must.rb >= a->must.rrb && a->must.rrb > 0)
+		a->must.rb = 0;
+	else if (a->must.rb <= a->must.rrb && a->must.rb > 0)
+		a->must.rrb = 0;
+	if (a->must.ra >= a->must.rra && a->must.rra > 0)
+		a->must.ra = 0;
+	else if (a->must.ra <= a->must.rra && a->must.ra > 0)
+		a->must.rra = 0;
 }
 
 void		worth_move(t_stack *a, t_stack *b)
 {
 	worth_move2(a, b);
 	if (a->must.fb_ra)
-	{
-		if (a->must.rb >= a->must.rrb && a->must.rrb > 0)
-			a->must.rb = 0;
-		else if (a->must.rb <= a->must.rrb && a->must.rb > 0)
-			a->must.rrb = 0;
-		if (a->must.ra >= a->must.rra && a->must.rra > 0)
-			a->must.ra = 0;
-		else if (a->must.ra <= a->must.rra && a->must.ra > 0)
-			a->must.rra = 0;
-	}
+		worth_move2b(a);
 	while (a->must.ra > 0)
 	{
 		rotate_sta(a);

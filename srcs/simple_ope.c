@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   simple_ope.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/26 01:29:35 by jmercier          #+#    #+#             */
+/*   Updated: 2021/04/26 05:26:09 by jmercier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <pcswap.h>
 
 /*
@@ -6,44 +18,24 @@
 
 void		swap_sta(t_stack *a)
 {
-    // t_pile  *tmp;
-    // t_pile  *tmp2;
-    // int     nb[2];
-    int     tmp;
+	int		tmp;
 
-    if (a == NULL || a->len < 2)
-        return ;
-    tmp = a->first->next->nb;
-    a->first->next->nb = a->first->nb;
-    a->first->nb = tmp;
-    // tmp = a->first;
-    // tmp2 = tmp->next;
-    // nb[0] = tmp->nb;
-    // nb[1] = tmp2->nb;
-    // tmp2->nb = nb[0];
-    // tmp->nb = nb[1];
-    // a->first = tmp;
+	if (a == NULL || a->len < 2)
+		return ;
+	tmp = a->first->next->nb;
+	a->first->next->nb = a->first->nb;
+	a->first->nb = tmp;
 }
 
 void		swap_stb(t_stack *b)
 {
-    // t_pile  *tmp;
-    // t_pile  *tmp2;
-    // int     nb[2];
 	int		tmp;
 
-    if (b == NULL || b->len < 2)
-        return ;
+	if (b == NULL || b->len < 2)
+		return ;
 	tmp = b->first->next->nb;
-    b->first->next->nb = b->first->nb;
-    b->first->nb = tmp;
-    // tmp = b->first;
-    // tmp2 = tmp->next;
-    // nb[0] = tmp->nb;
-    // nb[1] = tmp2->nb;
-    // tmp2->nb = nb[0];
-    // tmp->nb = nb[1];
-    // b->first = tmp;
+	b->first->next->nb = b->first->nb;
+	b->first->nb = tmp;
 }
 
 /*
@@ -52,24 +44,16 @@ void		swap_stb(t_stack *b)
 
 void		push_sta(t_stack *a, t_stack *b)
 {
-    t_pile  *tmp;
-    // t_pile  *tmp2 = NULL;
+	t_pile	*tmp;
 
-    if (b == NULL)
-        return ;
-    tmp = b->first->next;
-    b->first->next = a->first;
-    a->first = b->first;
-    b->first = tmp;
-    // tmp = b->first;
-    // tmp2 = ft_create_list(tmp->nb, tmp2, a->len + 1);
-    // tmp2->next = a->first;
-    // a->first = tmp2;
-    // b->first = tmp->next;
-    // free(tmp);
-    // tmp = NULL;
-    b->len--;
-    a->len++;
+	if (b == NULL)
+		return ;
+	tmp = b->first->next;
+	b->first->next = a->first;
+	a->first = b->first;
+	b->first = tmp;
+	b->len--;
+	a->len++;
 }
 
 /*
@@ -78,15 +62,14 @@ void		push_sta(t_stack *a, t_stack *b)
 
 void		push_stb(t_stack *a, t_stack *b)
 {
-    t_pile  *tmp;
-    // t_pile  *tmp2 = NULL;
+	t_pile	*tmp;
 
-    if (a == NULL)
-        return ;
-    tmp = a->first->next;
-    a->first->next = b->first;
-    b->first = a->first;
-    a->first = tmp;
-    a->len--;
-    b->len++;
+	if (a == NULL)
+		return ;
+	tmp = a->first->next;
+	a->first->next = b->first;
+	b->first = a->first;
+	a->first = tmp;
+	a->len--;
+	b->len++;
 }

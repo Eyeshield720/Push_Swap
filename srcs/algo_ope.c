@@ -1,37 +1,46 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algo_ope.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/26 00:39:13 by jmercier          #+#    #+#             */
+/*   Updated: 2021/04/26 01:10:09 by jmercier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <pcswap.h>
 
-static void push_b3max(t_stack *a, t_stack *b)
+static void	push_b3max(t_stack *a, t_stack *b)
 {
-    int     i;
+	int		i;
 
-    i = 0;
-    while (i < 2)
-    {
-        if ((a->first->nb == a->max || a->first->nb == a->max2)
+	i = 0;
+	while (i < 2)
+		if ((a->first->nb == a->max || a->first->nb == a->max2)
 			|| ((a->first->nb == a->max3) && (a->len > 4)))
-        {
-            rotate_sta(a);
-            printf("ra\n");
-            print_stacks(a, b);
-        }
-        else
-        {
-            push_stb(a, b);
-            printf("pb\n");
-            print_stacks(a, b);
-            i++;
-        }
-    }
-    if (b->first->nb < b->first->next->nb)
-    {
-        swap_stb(b);
-        printf("sb\n");
-        print_stacks(a, b);
-    }
+		{
+			rotate_sta(a);
+			printf("ra\n");
+			print_stacks(a, b);
+		}
+		else
+		{
+			push_stb(a, b);
+			printf("pb\n");
+			print_stacks(a, b);
+			i++;
+		}
+	if (b->first->nb < b->first->next->nb)
+	{
+		swap_stb(b);
+		printf("sb\n");
+		print_stacks(a, b);
+	}
 }
 
-
-static void short_opesta2(t_stack *a, t_stack *b)
+static void	short_opesta2(t_stack *a, t_stack *b)
 {
 	if (a->first->nb == a->max && a->first->next->nb == a->max2)
 	{
@@ -56,7 +65,7 @@ static void short_opesta2(t_stack *a, t_stack *b)
 	}
 }
 
-void	    short_opesta(t_stack *a, t_stack *b)
+void		short_opesta(t_stack *a, t_stack *b)
 {
 	if (a->first->nb == a->max2 && a->first->next->nb == a->max3)
 	{
@@ -77,7 +86,7 @@ void	    short_opesta(t_stack *a, t_stack *b)
 		short_opesta2(a, b);
 }
 
-int		second_sort(t_stack *a, t_stack *b)
+int			second_sort(t_stack *a, t_stack *b)
 {
 	if (a->len == 2)
 	{
@@ -93,12 +102,12 @@ int		second_sort(t_stack *a, t_stack *b)
 		sort_3max(a);
 		short_opesta(a, b);
 		final_sort(a, b);
-		return(0);
+		return (0);
 	}
 	return (1);
 }
 
-int		first_sort(t_stack *a, t_stack *b)
+int			first_sort(t_stack *a, t_stack *b)
 {
 	if (!check_first_stack(a) || !begin_sort1(a, b))
 		return (0);
@@ -119,6 +128,6 @@ int		first_sort(t_stack *a, t_stack *b)
 		short_opesta(a, b);
 		return (0);
 	}
-    push_b3max(a, b);
+	push_b3max(a, b);
 	return (1);
 }

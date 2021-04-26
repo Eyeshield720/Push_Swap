@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algo_end1.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/25 23:40:24 by jmercier          #+#    #+#             */
+/*   Updated: 2021/04/25 23:41:00 by jmercier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <pcswap.h>
 
 void		find_extrstb(t_stack *b, t_opcmp *op)
@@ -11,14 +23,11 @@ void		find_extrstb(t_stack *b, t_opcmp *op)
 	{
 		tmp = tmp->next;
 		if (b->min > tmp->nb)
-		{
 			b->min = tmp->nb;
-			// printf(LRED"minb=[%d]-[%d]"RESET, b->min, tmp->nb);
-		}
 	}
 }
 
-static int		plan_must2b(t_stack *b, t_opcmp *op)
+static int	plan_must2b(t_stack *b, t_opcmp *op)
 {
 	if ((op->ind == 1 && op->value > b->max) ||
 		(op->value < b->min && b->first->nb == b->max))
@@ -44,7 +53,7 @@ static int		plan_must2b(t_stack *b, t_opcmp *op)
 	return (0);
 }
 
-void			plan_must(t_stack *b, t_opcmp *op)
+void		plan_must(t_stack *b, t_opcmp *op)
 {
 	int		ind;
 	t_pile	*tmp1;
@@ -71,7 +80,7 @@ void			plan_must(t_stack *b, t_opcmp *op)
 	}
 }
 
-static void		worth_it_cmp2(t_stack *a, t_stack *b)
+static void	worth_it_cmp2(t_stack *a, t_stack *b)
 {
 	a->to_cmp.rra = a->len - a->to_cmp.ra;
 	plan_must(b, &a->to_cmp);
@@ -86,7 +95,7 @@ static void		worth_it_cmp2(t_stack *a, t_stack *b)
 	a->to_cmp.nb_ope = 0;
 }
 
-void			worth_it_cmp(t_stack *a, t_stack *b)
+void		worth_it_cmp(t_stack *a, t_stack *b)
 {
 	int		ind;
 	t_pile	*tmp;

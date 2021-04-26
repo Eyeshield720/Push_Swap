@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algo_end.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/25 23:39:40 by jmercier          #+#    #+#             */
+/*   Updated: 2021/04/25 23:40:09 by jmercier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <pcswap.h>
 
 void		find_maxb(t_stack *b, t_opcmp *op)
@@ -44,7 +56,6 @@ void		rev_sortb(t_stack *a, t_stack *b)
 			print_stacks(a, b);
 		}
 	}
-	
 }
 
 void		final_sort(t_stack *a, t_stack *b)

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checker.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/26 01:17:44 by jmercier          #+#    #+#             */
+/*   Updated: 2021/04/26 01:18:18 by jmercier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <pcswap.h>
 
-static int		check_order(t_stack *a)
+static int	check_order(t_stack *a)
 {
 	t_pile	*tmp;
 
@@ -14,7 +26,7 @@ static int		check_order(t_stack *a)
 	return (1);
 }
 
-static int		just_do_it2(t_stack *a, t_stack *b, char *line)
+static int	just_do_it2(t_stack *a, t_stack *b, char *line)
 {
 	int					ind;
 	const static char	*instruct[] = {"pa", "pb", "ss",
@@ -38,7 +50,7 @@ static int		just_do_it2(t_stack *a, t_stack *b, char *line)
 	return (0);
 }
 
-static int		just_do_it(t_stack *a, t_stack *b, char *line)
+static int	just_do_it(t_stack *a, t_stack *b, char *line)
 {
 	int						ind;
 	const static char		*instruct[] = {"sa", "ra", "rra", "sb",
@@ -89,10 +101,10 @@ static int	read_stdin(t_stack *a, t_stack *b)
 	return (1);
 }
 
-int		main(int ac, char **av)
+int			main(int ac, char **av)
 {
-	t_stack 	a;
-	t_stack 	b;
+	t_stack		a;
+	t_stack		b;
 
 	ft_bzero(&a, sizeof(t_stack));
 	ft_bzero(&b, sizeof(t_stack));

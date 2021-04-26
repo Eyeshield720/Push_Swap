@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/26 01:48:11 by jmercier          #+#    #+#             */
+/*   Updated: 2021/04/26 01:48:25 by jmercier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/pcswap.h"
 
 int		ft_strlen(const char *str)
@@ -24,7 +36,7 @@ void	ft_bzero(void *s, size_t n)
 	}
 }
 
-long		ft_atoi(const char *str)
+long	ft_atoi(const char *str)
 {
 	long	res;
 	int		i;

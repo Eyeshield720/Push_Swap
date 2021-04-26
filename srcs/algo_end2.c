@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algo_end2.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/25 23:41:14 by jmercier          #+#    #+#             */
+/*   Updated: 2021/04/25 23:42:01 by jmercier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <pcswap.h>
 
 static void	worth_swapping2(t_stack *a)
@@ -53,7 +65,7 @@ void		reset_ope(t_stack *a)
 	a->must.rrr = 0;
 	a->must.nb_ope = 0;
 	a->must.fb_rr = 0;
-	a->must.fb_rrr = 0;	
+	a->must.fb_rrr = 0;
 	a->to_cmp.ra = 0;
 }
 
@@ -63,7 +75,8 @@ void		feel_worth_it(t_stack *a, t_stack *b)
 
 	tmp = a->first;
 	a->must.value = tmp->nb;
-	if (a->must.value == a->max || a->must.value == a->max2 || a->must.value == a->max3)
+	if (a->must.value == a->max || a->must.value == a->max2
+		|| a->must.value == a->max3)
 	{
 		a->must.ra++;
 		a->must.check = 1;

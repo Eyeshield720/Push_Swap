@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   how_much.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/26 01:35:01 by jmercier          #+#    #+#             */
+/*   Updated: 2021/04/26 01:36:11 by jmercier         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <pcswap.h>
 
 static void	clean_rotateop(t_opcmp *op, int res)
@@ -55,7 +67,8 @@ void		how_muchop1(t_opcmp *op)
 
 	res = 0;
 	how_muchop2(op);
-	if ((op->rr + op->tmp_ra + op->tmp_rb < op->rrr + op->tmp_rra + op->tmp_rrb) ||
+	if ((op->rr + op->tmp_ra + op->tmp_rb <
+			op->rrr + op->tmp_rra + op->tmp_rrb) ||
 		((op->rr != 0 && op->rr == op->rrr) &&
 		(op->tmp_ra + op->tmp_rb < op->tmp_rra + op->tmp_rrb)))
 	{
@@ -63,7 +76,8 @@ void		how_muchop1(t_opcmp *op)
 		if (res < op->nb_ope)
 			clean_rotateop(op, res);
 	}
-	else if ((op->rr + op->tmp_ra + op->tmp_rb > op->rrr + op->tmp_rra + op->tmp_rrb) ||
+	else if ((op->rr + op->tmp_ra + op->tmp_rb >
+				op->rrr + op->tmp_rra + op->tmp_rrb) ||
 		((op->rr != 0 && op->rr == op->rrr) &&
 		(op->tmp_ra + op->tmp_rb > op->tmp_rra + op->tmp_rrb)))
 	{
@@ -72,5 +86,3 @@ void		how_muchop1(t_opcmp *op)
 			clean_rev_rotateop(op, res);
 	}
 }
-
-
