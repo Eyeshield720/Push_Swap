@@ -6,7 +6,7 @@
 #    By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/26 06:11:11 by jmercier          #+#    #+#              #
-#    Updated: 2021/04/26 20:58:09 by jmercier         ###   ########.fr        #
+#    Updated: 2021/04/28 14:05:08 by jmercier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,21 @@ CFLAGS	= -Werror -Wextra -Wall -I./include
 # CFLAGS	+= -fsanitize=address
 # CFLAGS	+= -g3
 
+TOTAL = $(shell find srcs -iname  "*.c" | wc -l | bc)
+define Bar
+	$(eval OBJ_COUNT := $(shell find $(OBJ_DIR) -iname "*.o" 2> /dev/null | wc -l | bc))
+	printf "\r|"
+	printf "█%.0s" $(shell seq 1 ${OBJ_COUNT})
+	printf "█"
+	$(eval COUNT := $(shell echo ${TOTAL} - ${OBJ_COUNT} | bc))
+	printf "%${COUNT}s" "|"
+	$(eval REF := $(shell echo ${OBJ_COUNT} + 1 | bc))
+	$(eval PROG := $(shell echo `expr ${REF} '*' 100 / ${TOTAL}` | bc))
+	printf "[${PROG}%%]"
+endef
+
 UNAME = $(shell uname)
-ifeq ("$(UNAME)", Darwin)
+ifeq ($(UNAME), Darwin)
 	CC		=	gcc
 	SRC_DIR	=	$(shell find ./srcs -type d)
 	OBJ_DIR	=	objs/
@@ -42,17 +55,19 @@ OBJ_PS	=	$(addprefix $(OBJ_DIR),$(SRC_PS:%.c=%.o))
 OBJ_CH	=	$(addprefix $(OBJ_DIR),$(SRC_CH:%.c=%.o))
 vpath %.c $(SRC_DIR)
 
-all :	$(NAME1) $(NAME2) run
+all :	$(NAME1) $(NAME2)
 
 $(NAME1) : $(INCLUDE) $(OBJ_PS)
 	@$(CC) $(CFLAGS) $(OBJ_PS) -o $(NAME1)
 
 $(NAME2) : $(INCLUDE) $(OBJ_CH)
 	@$(CC) $(CFLAGS) $(OBJ_CH) -o $(NAME2)
+	@echo -e '\r\033[1;32m$(NAME1) & $(NAME2) are ready \033[38;5;222m\xF0\x9F\x91\x8C\033[1;32m\xE2\x9C\x93\033[0m'
 
 $(OBJ_DIR)%.o : %.c
 	@mkdir -p $(OBJ_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(call Bar)
 
 ifeq ($(UNAME), Darwin)
 run :	$(NAME1) $(NAME2)
@@ -79,7 +94,7 @@ run :	$(NAME1) $(NAME2)
 	@echo "\033[38;5;038m       :dMMMMMMMMMNNNNMMMMMMMMMy.           '|.     || .     '||      | ||  \033[38;5;231m Mojave "
 	@echo "\033[38;5;038m         -shdhy+:``  \`.:oyhhy+.                '||...||  |'....|'     .|   ||.\n"
 else
-run	:	$(NAME)
+run	:	$(NAME1) $(NAME2)
 	@echo "\033c\033[38;5;33m\033[1m              .:oshdmmNmmmdys+-\`"
 	@echo "\033[38;5;33m          \`/yNMMMMMMMMMMMMMMMMMMds:"
 	@echo "\033[38;5;33m        /hMMMMMMMMMMMMMMMMMMMMMMMMMNs-"
