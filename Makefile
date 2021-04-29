@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+         #
+#    By: Eyeshield <Eyeshield@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/26 06:11:11 by jmercier          #+#    #+#              #
-#    Updated: 2021/04/28 14:05:08 by jmercier         ###   ########.fr        #
+#    Updated: 2021/04/29 22:20:22 by Eyeshield        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,9 @@ CFLAGS	= -Werror -Wextra -Wall -I./include
 TOTAL = $(shell find srcs -iname  "*.c" | wc -l | bc)
 define Bar
 	$(eval OBJ_COUNT := $(shell find $(OBJ_DIR) -iname "*.o" 2> /dev/null | wc -l | bc))
-	printf "\r|"
+	printf "\r|\033[32m"
 	printf "█%.0s" $(shell seq 1 ${OBJ_COUNT})
-	printf "█"
+	printf "█\033[0m"
 	$(eval COUNT := $(shell echo ${TOTAL} - ${OBJ_COUNT} | bc))
 	printf "%${COUNT}s" "|"
 	$(eval REF := $(shell echo ${OBJ_COUNT} + 1 | bc))
@@ -35,11 +35,16 @@ ifeq ($(UNAME), Darwin)
 	CC		=	gcc
 	SRC_DIR	=	$(shell find ./srcs -type d)
 	OBJ_DIR	=	objs/
-	CFLAGS	+=	-D APPLE
+	END		=	"\r\033[1;32m$(NAME1) & $(NAME2) are ready \xE2\x9C\x93\033[38;5;222m\xF0\x9F\x91\x8C\033[0m"
+	NORMED	=	"\033[1;32mNormed \xE2\x9C\x93\033[38;5;222m\xF0\x9F\x91\x8C\033[0m"
+	RUNNING	=	make run
 else
 	CC		=	clang
 	SRC_DIR =	$(shell find ./srcs -type d)
 	OBJ_DIR	=	objs_linux/
+	END		=	-e '\r\033[1;32m$(NAME1) & $(NAME2) are ready \033[38;5;222m\xF0\x9F\x91\x8C\033[1;32m\xE2\x9C\x93\033[0m'
+	NORMED	=	-e '\033[1;32mNormed \033[38;5;222m\xF0\x9F\x91\x8C\033[1;32m\xE2\x9C\x93\033[0m'
+	RUNNING	=	echo -n
 endif
 
 INCLUDE	=	include
@@ -62,7 +67,8 @@ $(NAME1) : $(INCLUDE) $(OBJ_PS)
 
 $(NAME2) : $(INCLUDE) $(OBJ_CH)
 	@$(CC) $(CFLAGS) $(OBJ_CH) -o $(NAME2)
-	@echo -e '\r\033[1;32m$(NAME1) & $(NAME2) are ready \033[38;5;222m\xF0\x9F\x91\x8C\033[1;32m\xE2\x9C\x93\033[0m'
+	@echo ${END}
+	@$(RUNNING)
 
 $(OBJ_DIR)%.o : %.c
 	@mkdir -p $(OBJ_DIR)
@@ -130,12 +136,10 @@ fclean : clean
 	@echo "\033[38;5;038mBinarys has cleanned\033[0m";
 
 norm :
-	@echo -n "\033[1;34m"
+	@echo "\033[1;34m"
 	@ruby ~/.norminette/norminette.rb ./include/*
 	@ruby ~/.norminette/norminette.rb ./srcs/*
-	@echo -n "\033[1;32m"
-	@echo -e 'Normed \033[38;5;222m\xF0\x9F\x91\x8C\033[1;32m\xE2\x9C\x93'
-	@echo -n "\033[0m"
+	@echo $(NORMED)
 
 re : fclean all
 
