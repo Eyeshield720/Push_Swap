@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Eyeshield <Eyeshield@student.42.fr>        +#+  +:+       +#+         #
+#    By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/26 06:11:11 by jmercier          #+#    #+#              #
-#    Updated: 2021/04/29 22:20:22 by Eyeshield        ###   ########.fr        #
+#    Updated: 2021/04/30 15:08:30 by jmercier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,14 +20,14 @@ CFLAGS	= -Werror -Wextra -Wall -I./include
 TOTAL = $(shell find srcs -iname  "*.c" | wc -l | bc)
 define Bar
 	$(eval OBJ_COUNT := $(shell find $(OBJ_DIR) -iname "*.o" 2> /dev/null | wc -l | bc))
-	printf "\r|\033[32m"
-	printf "█%.0s" $(shell seq 1 ${OBJ_COUNT})
-	printf "█\033[0m"
+	$(if $(findstring ${TOTAL},$(shell echo ${OBJ_COUNT} + 1 | bc)), printf "\r\033[1;34m|\033[32m", printf "\r\033[1;34m|\033[2;33m")
+	printf "█%.0s" $(shell seq 0 ${OBJ_COUNT})
+	printf "█\033[0m\033[1;34m"
 	$(eval COUNT := $(shell echo ${TOTAL} - ${OBJ_COUNT} | bc))
-	printf "%${COUNT}s" "|"
+	printf "%${COUNT}s\033[0m\033[1m" "|"
 	$(eval REF := $(shell echo ${OBJ_COUNT} + 1 | bc))
 	$(eval PROG := $(shell echo `expr ${REF} '*' 100 / ${TOTAL}` | bc))
-	printf "[${PROG}%%]"
+	$(if $(filter-out ${PROG},100), printf "[\033[1;2;33m${PROG}%%\033[0m\033[1m]\033[0m", printf "[\033[1;32m${PROG}%%\033[0m\033[1m]\033[0m")
 endef
 
 UNAME = $(shell uname)
@@ -44,7 +44,7 @@ else
 	OBJ_DIR	=	objs_linux/
 	END		=	-e '\r\033[1;32m$(NAME1) & $(NAME2) are ready \033[38;5;222m\xF0\x9F\x91\x8C\033[1;32m\xE2\x9C\x93\033[0m'
 	NORMED	=	-e '\033[1;32mNormed \033[38;5;222m\xF0\x9F\x91\x8C\033[1;32m\xE2\x9C\x93\033[0m'
-	RUNNING	=	echo -n
+	RUNNING	=	echo -en '\033[1;33mmake run\033[0m \033[1;30mfor see all spec of your device\033[0m\n\033[1;2;34mmake norm\033[0m \033[1;30mfor check file with norminette\033[0m\n'
 endif
 
 INCLUDE	=	include
@@ -96,7 +96,7 @@ run :	$(NAME1) $(NAME2)
 	@echo "\033[38;5;196m  -NMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMy"
 	@echo "\033[38;5;129m   :NMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMd\`        ..|''||    .|'''.|     '||' '|'"
 	@echo "\033[38;5;129m    -mMMMMMMMMMMMMMMMMMMMMMMMMMMMMh\`        .|'    ||   ||..  '       || |"
-	@echo "\033[38;5;129m     \`yMMMMMMMMMMMMMMMMMMMMMMMMMN+          ||      ||   ''|||.        ||   \033[38;5;222mCopyright© 42-2020 by \"jmercier\""
+	@echo "\033[38;5;129m     \`yMMMMMMMMMMMMMMMMMMMMMMMMMN+          ||      ||   ''|||.        ||   \033[38;5;222mCopyright© 42-2021 by \"jmercier\""
 	@echo "\033[38;5;038m       :dMMMMMMMMMNNNNMMMMMMMMMy.           '|.     || .     '||      | ||  \033[38;5;231m Mojave "
 	@echo "\033[38;5;038m         -shdhy+:``  \`.:oyhhy+.                '||...||  |'....|'     .|   ||.\n"
 else
@@ -124,7 +124,7 @@ run	:	$(NAME1) $(NAME2)
 	@echo "\033[38;5;33m        .smMMMMMMMMMMMMMMMMMMMMMMMMh/\`		 \  / | | | '_ \| | | | '_ \| __| | | |"
 	@echo "\033[38;5;33m           -ohNMMMMMMMMMMMMMMMMds/\`		 /  \ |_| | |_) | |_| | | | | |_| |_| |"
 	@echo "\033[38;5;33m               \`-/+syyhhyyso/-\`			/_/\_\__,_|_.__/ \__,_|_| |_|\__|\__,_|	\033[38;5;231m$(shell inxi -S | grep Distro | cut -d : -f2 | tr -d LTS)"
-	@echo "     							 \033[38;5;30mCopyright© 42-2020 by jmercier\n"
+	@echo "     							 \033[38;5;30mCopyright© 42-2021 by jmercier\n"
 endif
 
 clean :
@@ -136,7 +136,7 @@ fclean : clean
 	@echo "\033[38;5;038mBinarys has cleanned\033[0m";
 
 norm :
-	@echo "\033[1;34m"
+	@printf "\033[1;34m"
 	@ruby ~/.norminette/norminette.rb ./include/*
 	@ruby ~/.norminette/norminette.rb ./srcs/*
 	@echo $(NORMED)
