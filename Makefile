@@ -6,7 +6,7 @@
 #    By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/26 06:11:11 by jmercier          #+#    #+#              #
-#    Updated: 2021/04/30 15:08:30 by jmercier         ###   ########.fr        #
+#    Updated: 2021/05/03 07:34:49 by jmercier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,14 +20,20 @@ CFLAGS	= -Werror -Wextra -Wall -I./include
 TOTAL = $(shell find srcs -iname  "*.c" | wc -l | bc)
 define Bar
 	$(eval OBJ_COUNT := $(shell find $(OBJ_DIR) -iname "*.o" 2> /dev/null | wc -l | bc))
-	$(if $(findstring ${TOTAL},$(shell echo ${OBJ_COUNT} + 1 | bc)), printf "\r\033[1;34m|\033[32m", printf "\r\033[1;34m|\033[2;33m")
+	printf $(shell if [ $(shell echo ${TOTAL} / 4 | bc) -gt $(shell echo ${OBJ_COUNT} + 1 | bc) ]; then printf "\r\033[1\;34m\|\033[31m"; \
+	elif [ $(shell echo ${TOTAL} / 2.5 | bc) -gt $(shell echo ${OBJ_COUNT} + 1 | bc) ]; then printf "\r\033[1\;34m\|\033[35m"; \
+	elif [ $(shell echo ${TOTAL} / 1.8 | bc) -gt $(shell echo ${OBJ_COUNT} + 1 | bc) ]; then printf "\r\033[1\;34m\|\033[38\;5\;129m"; \
+	elif [ $(shell echo ${TOTAL} / 1.3 | bc) -gt $(shell echo ${OBJ_COUNT} + 1 | bc) ]; then printf "\r\033[1\;34m\|\033[38\;5\;222m"; \
+	elif [ $(shell echo ${TOTAL} / 1.1 | bc) -gt $(shell echo ${OBJ_COUNT} + 1 | bc) ]; then printf "\r\033[1\;34m\|\033[2\;33m"; \
+	elif [ $(shell echo ${TOTAL} / 1 | bc) -gt $(shell echo ${OBJ_COUNT} + 1 | bc) ]; then printf "\r\033[1\;34m\|\033[2\;32m"; \
+	else printf "\r\033[1\;34m\|\033[32m"; fi)
 	printf "█%.0s" $(shell seq 0 ${OBJ_COUNT})
 	printf "█\033[0m\033[1;34m"
 	$(eval COUNT := $(shell echo ${TOTAL} - ${OBJ_COUNT} | bc))
 	printf "%${COUNT}s\033[0m\033[1m" "|"
 	$(eval REF := $(shell echo ${OBJ_COUNT} + 1 | bc))
 	$(eval PROG := $(shell echo `expr ${REF} '*' 100 / ${TOTAL}` | bc))
-	$(if $(filter-out ${PROG},100), printf "[\033[1;2;33m${PROG}%%\033[0m\033[1m]\033[0m", printf "[\033[1;32m${PROG}%%\033[0m\033[1m]\033[0m")
+	$(if $(filter-out ${PROG},100), printf "[\033[1;2;37m${PROG}%%\033[0m\033[1m]\033[0m", printf "[\033[1;32m${PROG}%%\033[0m\033[1m]\033[0m")
 endef
 
 UNAME = $(shell uname)
