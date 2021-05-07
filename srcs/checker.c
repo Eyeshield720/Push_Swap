@@ -6,7 +6,7 @@
 /*   By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 01:17:44 by jmercier          #+#    #+#             */
-/*   Updated: 2021/05/04 01:10:44 by jmercier         ###   ########.fr       */
+/*   Updated: 2021/05/07 20:52:21 by jmercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,6 @@ static int	just_do_it2(t_stack *a, t_stack *b, char *line)
 	{
 		if (!ft_strcmp(instruct[ind], line))
 		{
-			if ((!ft_strcmp(line, "pa") && b->first == NULL) ||
-				(!ft_strcmp(line, "pb") && a->first == NULL))
-				return (1);
 			stack_both[ind](a, b);
 			print_stacks(a, b);
 			return (1);

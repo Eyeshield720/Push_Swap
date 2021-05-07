@@ -6,7 +6,7 @@
 /*   By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 01:29:35 by jmercier          #+#    #+#             */
-/*   Updated: 2021/04/26 05:26:09 by jmercier         ###   ########.fr       */
+/*   Updated: 2021/05/07 20:53:47 by jmercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		swap_sta(t_stack *a)
 {
 	int		tmp;
 
-	if (a == NULL || a->len < 2)
+	if (a->first == NULL || a->len < 2)
 		return ;
 	tmp = a->first->next->nb;
 	a->first->next->nb = a->first->nb;
@@ -31,7 +31,7 @@ void		swap_stb(t_stack *b)
 {
 	int		tmp;
 
-	if (b == NULL || b->len < 2)
+	if (b->first == NULL || b->len < 2)
 		return ;
 	tmp = b->first->next->nb;
 	b->first->next->nb = b->first->nb;
@@ -46,7 +46,7 @@ void		push_sta(t_stack *a, t_stack *b)
 {
 	t_pile	*tmp;
 
-	if (b == NULL)
+	if (b->first == NULL)
 		return ;
 	tmp = b->first->next;
 	b->first->next = a->first;
@@ -64,7 +64,7 @@ void		push_stb(t_stack *a, t_stack *b)
 {
 	t_pile	*tmp;
 
-	if (a == NULL)
+	if (a->first == NULL)
 		return ;
 	tmp = a->first->next;
 	a->first->next = b->first;
