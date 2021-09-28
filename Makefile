@@ -6,7 +6,7 @@
 #    By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/26 06:11:11 by jmercier          #+#    #+#              #
-#    Updated: 2021/05/04 03:51:13 by jmercier         ###   ########.fr        #
+#    Updated: 2021/05/17 16:30:34 by jmercier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME1	=	push_swap
 NAME2	=	checker
 
 CFLAGS	= -Werror -Wextra -Wall -I./include
-# CFLAGS	+= -fsanitize=address
+CFLAGS	+= -fsanitize=address
 # CFLAGS	+= -g3
 
 TOTAL = $(shell find srcs -iname  "*.c" | wc -l | bc)

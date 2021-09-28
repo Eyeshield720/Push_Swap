@@ -6,7 +6,7 @@
 /*   By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 05:40:02 by jmercier          #+#    #+#             */
-/*   Updated: 2021/05/07 20:55:44 by jmercier         ###   ########.fr       */
+/*   Updated: 2021/09/09 13:37:39 by jmercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ int					ft_isdigit(int c);
 int					ft_strcmp(const char *s1, const char *s2);
 
 t_pile				*ft_create_list(int nb, t_pile *pile, int i);
-void				free_stack(t_stack *random);
+int					free_stack(t_stack *random);
 
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_strnew(size_t size);

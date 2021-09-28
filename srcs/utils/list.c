@@ -6,7 +6,7 @@
 /*   By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 01:38:13 by jmercier          #+#    #+#             */
-/*   Updated: 2021/04/26 05:23:20 by jmercier         ###   ########.fr       */
+/*   Updated: 2021/05/26 03:39:53 by jmercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ t_pile		*ft_create_list(int nb, t_pile *face, int i)
 	return (face);
 }
 
-void		free_stack(t_stack *random)
+int			free_stack(t_stack *random)
 {
 	t_pile	*to_del;
 
 	if (random == NULL)
-		return ;
+		return (0);
 	while (random->first)
 	{
 		to_del = random->first->next;
@@ -37,4 +37,5 @@ void		free_stack(t_stack *random)
 	}
 	free(random->first);
 	random->first = NULL;
+	return (0);
 }

@@ -6,13 +6,13 @@
 /*   By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 01:17:44 by jmercier          #+#    #+#             */
-/*   Updated: 2021/05/07 20:52:21 by jmercier         ###   ########.fr       */
+/*   Updated: 2021/05/17 16:00:22 by jmercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pcswap.h>
 
-static int	check_order(t_stack *a)
+static int	check_order(t_stack *a, t_stack *b)
 {
 	t_pile	*tmp;
 
@@ -20,9 +20,15 @@ static int	check_order(t_stack *a)
 	while (tmp->next)
 	{
 		if (tmp->nb > tmp->next->nb)
+		{
+			free_stack(a);
+			free_stack(b);
 			return (0);
+		}
 		tmp = tmp->next;
 	}
+	free_stack(a);
+	free_stack(b);
 	return (1);
 }
 
@@ -96,7 +102,7 @@ static int	read_stdin(t_stack *a, t_stack *b)
 	}
 	free(line);
 	line = NULL;
-	if (b->len == 0 && check_order(a))
+	if (b->len == 0 && check_order(a, b))
 		printf(GREN"OK\n"RES);
 	else
 		printf(RED"KO\n"RES);

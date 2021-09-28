@@ -6,7 +6,7 @@
 /*   By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 22:38:25 by jmercier          #+#    #+#             */
-/*   Updated: 2021/04/25 23:39:03 by jmercier         ###   ########.fr       */
+/*   Updated: 2021/05/26 03:40:24 by jmercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,26 @@ static int	last_check(t_stack *a)
 static int	set_stacks2(t_stack *a, char **arg, int i, int j)
 {
 	t_pile	*tmp;
+	t_pile	*ftmp;
 	long	nb_tmp;
 
 	tmp = NULL;
+	ftmp = a->first;
 	nb_tmp = ft_atoi(arg[i] + j);
+	if (nb_tmp == 0 && arg[i][j] != '0')
+		return (1);
 	if (nb_tmp > INT_MAX || nb_tmp < INT_MIN)
-	{
-		free_stack(a);
-		return (0);
-	}
+		return (free_stack(a));
 	tmp = ft_create_list(ft_atoi(arg[i] + j), tmp, a->len);
-	tmp->next = a->first;
-	a->first = tmp;
+	if (a->first == NULL)
+		a->first = tmp;
+	else
+	{
+		while (a->first->next != NULL)
+			a->first = a->first->next;
+		a->first->next = tmp;
+		a->first = ftmp;
+	}
 	tmp = NULL;
 	a->len++;
 	return (1);
@@ -60,8 +68,8 @@ int			set_stacks(t_stack *a, char **arg, int ac)
 	int		i;
 	int		j;
 
-	i = ac - 1;
-	while (i > (1 + a->must.bonus_v) - 1)
+	i = (1 + a->must.bonus_v);
+	while ((ac - 1) >= i)
 	{
 		j = 0;
 		while (arg[i][j])
@@ -79,7 +87,7 @@ int			set_stacks(t_stack *a, char **arg, int ac)
 			while ((arg[i][j] >= '0' && arg[i][j] <= '9'))
 				j++;
 		}
-		i--;
+		i++;
 	}
 	return (last_check(a));
 }
