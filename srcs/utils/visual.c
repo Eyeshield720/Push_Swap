@@ -38,7 +38,7 @@ static void	synchro_stacks(t_stack *a, t_stack *b)
 	}
 }
 
-void		print_stacks(t_stack *a, t_stack *b)
+void	print_stacks(t_stack *a, t_stack *b)
 {
 	t_pile	*tmpa;
 	t_pile	*tmpb;
@@ -48,11 +48,11 @@ void		print_stacks(t_stack *a, t_stack *b)
 	if (a->must.bonus_v == 0)
 		return ;
 	printf(GREY"-----------------------------\r\t\t\t\t"
-			"-----------------------------\n"RES);
+		"-----------------------------\n"RES);
 	printf(GREY"\t| "RES ITAL SOUL CYAN"stack A" RES GREY" |\r\t\t\t\t"RES);
 	printf(GREY"\t| "RES ITAL SOUL CYAN"stack B" RES GREY" |\n"RES);
 	printf(GREY"-----------------------------\r\t\t\t\t"
-			"-----------------------------\n"RES);
+		"-----------------------------\n"RES);
 	synchro_stacks(a, b);
 	printf(GREY"-----------------------------\r\t\t\t\t"RES);
 	printf(GREY"-----------------------------\n"RES);

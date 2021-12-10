@@ -6,7 +6,7 @@
 /*   By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 01:35:01 by jmercier          #+#    #+#             */
-/*   Updated: 2021/04/26 01:36:11 by jmercier         ###   ########.fr       */
+/*   Updated: 2021/12/10 08:00:52 by jmercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	clean_rev_rotateop(t_opcmp *op, int res)
 	op->rrb = op->tmp_rrb;
 }
 
-void		how_muchop2(t_opcmp *op)
+void	how_muchop2(t_opcmp *op)
 {
 	if (op->ra <= op->rra && op->rb <= op->rrb)
 		op->nb_ope = op->ra + op->rb;
@@ -61,25 +61,25 @@ void		how_muchop2(t_opcmp *op)
 	}
 }
 
-void		how_muchop1(t_opcmp *op)
+void	how_muchop1(t_opcmp *op)
 {
 	int		res;
 
 	res = 0;
 	how_muchop2(op);
-	if ((op->rr + op->tmp_ra + op->tmp_rb <
-			op->rrr + op->tmp_rra + op->tmp_rrb) ||
-		((op->rr != 0 && op->rr == op->rrr) &&
-		(op->tmp_ra + op->tmp_rb < op->tmp_rra + op->tmp_rrb)))
+	if ((op->rr + op->tmp_ra + op->tmp_rb
+			< op->rrr + op->tmp_rra + op->tmp_rrb)
+		|| ((op->rr != 0 && op->rr == op->rrr)
+			&& (op->tmp_ra + op->tmp_rb < op->tmp_rra + op->tmp_rrb)))
 	{
 		res = op->rr + op->tmp_ra + op->tmp_rb;
 		if (res < op->nb_ope)
 			clean_rotateop(op, res);
 	}
-	else if ((op->rr + op->tmp_ra + op->tmp_rb >
-				op->rrr + op->tmp_rra + op->tmp_rrb) ||
-		((op->rr != 0 && op->rr == op->rrr) &&
-		(op->tmp_ra + op->tmp_rb > op->tmp_rra + op->tmp_rrb)))
+	else if ((op->rr + op->tmp_ra + op->tmp_rb
+			> op->rrr + op->tmp_rra + op->tmp_rrb)
+		|| ((op->rr != 0 && op->rr == op->rrr)
+			&& (op->tmp_ra + op->tmp_rb > op->tmp_rra + op->tmp_rrb)))
 	{
 		res = op->rrr + op->tmp_rra + op->tmp_rrb;
 		if (res < op->nb_ope)

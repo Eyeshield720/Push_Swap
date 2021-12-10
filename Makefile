@@ -6,7 +6,7 @@
 #    By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/26 06:11:11 by jmercier          #+#    #+#              #
-#    Updated: 2021/05/17 16:30:34 by jmercier         ###   ########.fr        #
+#    Updated: 2021/12/10 08:44:06 by jmercier         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME1	=	push_swap
 NAME2	=	checker
 
 CFLAGS	= -Werror -Wextra -Wall -I./include
-CFLAGS	+= -fsanitize=address
+# CFLAGS	+= -fsanitimake fze=address
 # CFLAGS	+= -g3
 
 TOTAL = $(shell find srcs -iname  "*.c" | wc -l | bc)
@@ -59,7 +59,7 @@ SRC_PS	=	push_swap.c utils.c parse_init.c visual.c list.c check_stack.c \
 			simple_ope.c rotate_ope.c double_ope.c \
 			algo.c algo_ope.c algo_end.c algo_end1.c algo_end2.c algo_end3.c how_much.c \
 
-SRC_CH	=	checker.c utils.c parse_init.c visual.c list.c check_stack.c get_next_line.c get_next_line_utils.c \
+SRC_CH	=	checker.c utils.c parse_init.c visual.c list.c check_stack.c get_next_line.c \
 			simple_ope.c rotate_ope.c double_ope.c \
 
 OBJ_PS	=	$(addprefix $(OBJ_DIR),$(SRC_PS:%.c=%.o))
@@ -74,7 +74,7 @@ $(NAME1) : $(INCLUDE) $(OBJ_PS)
 $(NAME2) : $(INCLUDE) $(OBJ_CH)
 	@$(CC) $(CFLAGS) $(OBJ_CH) -o $(NAME2)
 	@echo ${END}
-	@$(RUNNING)
+	# @$(RUNNING)
 
 $(OBJ_DIR)%.o : %.c
 	@mkdir -p $(OBJ_DIR)

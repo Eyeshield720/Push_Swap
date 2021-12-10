@@ -6,7 +6,7 @@
 /*   By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 01:29:35 by jmercier          #+#    #+#             */
-/*   Updated: 2021/05/07 20:53:47 by jmercier         ###   ########.fr       */
+/*   Updated: 2021/12/10 07:38:18 by jmercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 **	Ope swap and push for both stacks
 */
 
-void		swap_sta(t_stack *a)
+void	swap_sta(t_stack *a)
 {
 	int		tmp;
 
@@ -27,7 +27,7 @@ void		swap_sta(t_stack *a)
 	a->first->nb = tmp;
 }
 
-void		swap_stb(t_stack *b)
+void	swap_stb(t_stack *b)
 {
 	int		tmp;
 
@@ -42,7 +42,7 @@ void		swap_stb(t_stack *b)
 **  Push first elem Stack B to Stack A
 */
 
-void		push_sta(t_stack *a, t_stack *b)
+void	push_sta(t_stack *a, t_stack *b)
 {
 	t_pile	*tmp;
 
@@ -60,7 +60,7 @@ void		push_sta(t_stack *a, t_stack *b)
 **  Push first elem Stack A to Stack B
 */
 
-void		push_stb(t_stack *a, t_stack *b)
+void	push_stb(t_stack *a, t_stack *b)
 {
 	t_pile	*tmp;
 

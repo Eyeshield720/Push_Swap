@@ -6,7 +6,7 @@
 /*   By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 23:42:13 by jmercier          #+#    #+#             */
-/*   Updated: 2021/04/26 00:37:04 by jmercier         ###   ########.fr       */
+/*   Updated: 2021/12/10 08:42:31 by jmercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ static void	worth_move2(t_stack *a, t_stack *b)
 		while (a->must.rr > 0)
 		{
 			suit_rotate(a, b);
-			printf("rr\n") ? print_stacks(a, b) : 0;
+			printf("rr\n");
+			print_stacks(a, b);
 			a->must.rr--;
 		}
 	}
@@ -57,11 +58,11 @@ static void	worth_move2(t_stack *a, t_stack *b)
 		a->must.ra = 0;
 		a->must.rb = 0;
 		a->must.rr = 0;
-		while (a->must.rrr > 0)
+		while (a->must.rrr-- > 0)
 		{
 			suit_rot_reverse(a, b);
-			printf("rrr\n") ? print_stacks(a, b) : 0;
-			a->must.rrr--;
+			printf("rrr\n");
+			print_stacks(a, b);
 		}
 	}
 }
@@ -78,7 +79,7 @@ static void	worth_move2b(t_stack *a)
 		a->must.rra = 0;
 }
 
-void		worth_move(t_stack *a, t_stack *b)
+void	worth_move(t_stack *a, t_stack *b)
 {
 	worth_move2(a, b);
 	if (a->must.fb_ra)
@@ -100,7 +101,7 @@ void		worth_move(t_stack *a, t_stack *b)
 	worth_move3(a, b);
 }
 
-void		finisher(t_stack *a, t_stack *b)
+void	finisher(t_stack *a, t_stack *b)
 {
 	short_opesta(a, b);
 	final_sort(a, b);

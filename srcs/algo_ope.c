@@ -6,18 +6,16 @@
 /*   By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 00:39:13 by jmercier          #+#    #+#             */
-/*   Updated: 2021/05/18 14:20:18 by jmercier         ###   ########.fr       */
+/*   Updated: 2021/12/10 08:17:45 by jmercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pcswap.h>
 
-static void	push_b3max(t_stack *a, t_stack *b)
+static void	push_b3max(t_stack *a, t_stack *b, int i)
 {
-	int		i;
-
-	i = 0;
 	while (i < 2)
+	{
 		if ((a->first->nb == a->max || a->first->nb == a->max2)
 			|| ((a->first->nb == a->max3) && (a->len > 3)))
 		{
@@ -32,6 +30,7 @@ static void	push_b3max(t_stack *a, t_stack *b)
 			print_stacks(a, b);
 			i++;
 		}
+	}
 	if (b->first->nb < b->first->next->nb)
 	{
 		swap_stb(b);
@@ -65,7 +64,7 @@ static void	short_opesta2(t_stack *a, t_stack *b)
 	}
 }
 
-void		short_opesta(t_stack *a, t_stack *b)
+void	short_opesta(t_stack *a, t_stack *b)
 {
 	if (a->first->nb == a->max2 && a->first->next->nb == a->max3)
 	{
@@ -86,7 +85,7 @@ void		short_opesta(t_stack *a, t_stack *b)
 		short_opesta2(a, b);
 }
 
-int			second_sort(t_stack *a, t_stack *b)
+int	second_sort(t_stack *a, t_stack *b)
 {
 	if (a->len == 2)
 	{
@@ -110,7 +109,7 @@ int			second_sort(t_stack *a, t_stack *b)
 	return (1);
 }
 
-int			first_sort(t_stack *a, t_stack *b)
+int	first_sort(t_stack *a, t_stack *b)
 {
 	if (!check_first_stack(a) || !begin_sort1(a, b))
 		return (0);
@@ -131,6 +130,7 @@ int			first_sort(t_stack *a, t_stack *b)
 		short_opesta(a, b);
 		return (0);
 	}
-	push_b3max(a, b);
+	push_b3max(a, b, 0);
+	if2max(a, b);
 	return (1);
 }

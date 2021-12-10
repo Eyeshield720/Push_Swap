@@ -6,7 +6,7 @@
 /*   By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 01:10:26 by jmercier          #+#    #+#             */
-/*   Updated: 2021/05/26 03:38:54 by jmercier         ###   ########.fr       */
+/*   Updated: 2021/12/10 08:22:53 by jmercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	find_trio(t_stack *a)
 			tmp = a->first;
 		}
 		if (a->max3 < tmp->nb && a->max3 < a->max2
-				&& a->max != tmp->nb && a->max2 != tmp->nb)
+			&& a->max != tmp->nb && a->max2 != tmp->nb)
 		{
 			a->max3 = tmp->nb;
 			tmp = a->first;
@@ -89,7 +89,20 @@ void	sort_3max(t_stack *a)
 	}
 }
 
-int		start_move(t_stack *a, t_stack *b)
+void	if2max(t_stack *a, t_stack *b)
+{
+	if (a->len == 2 && b->len == 2)
+	{
+		if (a->first->nb > a->first->next->nb)
+		{
+			swap_sta(a);
+			printf("sa\n");
+			print_stacks(a, b);
+		}
+	}
+}
+
+int	start_move(t_stack *a, t_stack *b)
 {
 	if (!first_sort(a, b))
 	{

@@ -6,13 +6,13 @@
 /*   By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 23:40:24 by jmercier          #+#    #+#             */
-/*   Updated: 2021/04/25 23:41:00 by jmercier         ###   ########.fr       */
+/*   Updated: 2021/12/10 08:21:55 by jmercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pcswap.h>
 
-void		find_extrstb(t_stack *b, t_opcmp *op)
+void	find_extrstb(t_stack *b, t_opcmp *op)
 {
 	t_pile	*tmp;
 
@@ -29,8 +29,8 @@ void		find_extrstb(t_stack *b, t_opcmp *op)
 
 static int	plan_must2b(t_stack *b, t_opcmp *op)
 {
-	if ((op->ind == 1 && op->value > b->max) ||
-		(op->value < b->min && b->first->nb == b->max))
+	if ((op->ind == 1 && op->value > b->max)
+		|| (op->value < b->min && b->first->nb == b->max))
 		return (0);
 	else if (op->ind < b->len / 2)
 	{
@@ -53,7 +53,7 @@ static int	plan_must2b(t_stack *b, t_opcmp *op)
 	return (0);
 }
 
-void		plan_must(t_stack *b, t_opcmp *op)
+void	plan_must(t_stack *b, t_opcmp *op)
 {
 	int		ind;
 	t_pile	*tmp1;
@@ -95,7 +95,7 @@ static void	worth_it_cmp2(t_stack *a, t_stack *b)
 	a->to_cmp.nb_ope = 0;
 }
 
-void		worth_it_cmp(t_stack *a, t_stack *b)
+void	worth_it_cmp(t_stack *a, t_stack *b)
 {
 	int		ind;
 	t_pile	*tmp;
@@ -109,7 +109,7 @@ void		worth_it_cmp(t_stack *a, t_stack *b)
 		ind++;
 		a->to_cmp.ra = ind;
 		while (a->to_cmp.value == a->max || a->to_cmp.value == a->max2
-				|| a->to_cmp.value == a->max3)
+			|| a->to_cmp.value == a->max3)
 		{
 			tmp = tmp->next;
 			ind++;

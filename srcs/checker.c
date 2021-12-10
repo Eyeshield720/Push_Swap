@@ -6,7 +6,7 @@
 /*   By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 01:17:44 by jmercier          #+#    #+#             */
-/*   Updated: 2021/05/17 16:00:22 by jmercier         ###   ########.fr       */
+/*   Updated: 2021/12/10 08:03:08 by jmercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	just_do_it2(t_stack *a, t_stack *b, char *line)
 {
 	int					ind;
 	const static char	*instruct[] = {"pa", "pb", "ss",
-										"rr", "rrr", NULL};
+		"rr", "rrr", NULL};
 	static t_op_both	*stack_both[] = {
 		&push_sta, &push_stb, &suit_swap,
 		&suit_rotate, suit_rot_reverse,
@@ -61,7 +61,7 @@ static int	just_do_it(t_stack *a, t_stack *b, char *line)
 {
 	int						ind;
 	const static char		*instruct[] = {"sa", "ra", "rra", "sb",
-	"rb", "rrb", NULL};
+		"rb", "rrb", NULL};
 	static t_op_stack		*only_stack[] = {
 		&swap_sta, &rotate_sta, &rev_rotate_sta,
 		&swap_stb, &rotate_stb, &rev_rotate_stb,
@@ -109,7 +109,7 @@ static int	read_stdin(t_stack *a, t_stack *b)
 	return (1);
 }
 
-int			main(int ac, char **av)
+int	main(int ac, char **av)
 {
 	t_stack		a;
 	t_stack		b;

@@ -12,7 +12,7 @@
 
 #include "../../include/pcswap.h"
 
-int		ft_strlen(const char *str)
+int	ft_strlen(const char *str)
 {
 	int		i;
 
@@ -31,7 +31,7 @@ void	ft_bzero(void *s, size_t n)
 	c = 0;
 	while (i < n)
 	{
-		((unsigned char*)s)[i] = (unsigned char)c;
+		((unsigned char *)s)[i] = (unsigned char)c;
 		i++;
 	}
 }
@@ -46,7 +46,7 @@ long	ft_atoi(const char *str)
 	i = 0;
 	sig = 1;
 	while (str[i] == '\f' || str[i] == '\t' || str[i] == '\n' || str[i] == ' '
-			|| str[i] == '\v' || str[i] == '\r')
+		|| str[i] == '\v' || str[i] == '\r')
 		i++;
 	if (str[i] == '-' || str[i] == '+')
 	{
@@ -62,7 +62,7 @@ long	ft_atoi(const char *str)
 	return (res * sig);
 }
 
-int		ft_strcmp(const char *s1, const char *s2)
+int	ft_strcmp(const char *s1, const char *s2)
 {
 	int		i;
 

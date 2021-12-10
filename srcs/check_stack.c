@@ -6,7 +6,7 @@
 /*   By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 01:11:35 by jmercier          #+#    #+#             */
-/*   Updated: 2021/05/26 03:38:28 by jmercier         ###   ########.fr       */
+/*   Updated: 2021/12/10 08:39:18 by jmercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	find_mina(t_stack *a)
 	}
 }
 
-void		begin_sort2(t_stack *a, t_stack *b)
+void	begin_sort2(t_stack *a, t_stack *b)
 {
 	if (a->pos < a->len / 2)
 	{
@@ -53,7 +53,7 @@ void		begin_sort2(t_stack *a, t_stack *b)
 	print_stacks(a, b);
 }
 
-int			begin_sort1(t_stack *a, t_stack *b)
+int	begin_sort1(t_stack *a, t_stack *b)
 {
 	if (a->diff == 1 && a->len > 5)
 	{
@@ -64,7 +64,8 @@ int			begin_sort1(t_stack *a, t_stack *b)
 			while (a->min != a->first->nb)
 			{
 				rev_rotate_sta(a);
-				printf("rra\n") ? print_stacks(a, b) : 0;
+				printf("rra\n");
+				print_stacks(a, b);
 			}
 		}
 		else
@@ -72,17 +73,16 @@ int			begin_sort1(t_stack *a, t_stack *b)
 			while (a->min != a->first->nb)
 			{
 				rotate_sta(a);
-				printf("ra\n") ? print_stacks(a, b) : 0;
+				printf("ra\n");
+				print_stacks(a, b);
 			}
 		}
-		if (check_first_stack(a) == 1)
-			return (1);
-		return (0);
+		return (check_first_stack(a));
 	}
 	return (1);
 }
 
-int			check_first_stack(t_stack *a)
+int	check_first_stack(t_stack *a)
 {
 	t_pile	*tmp;
 	int		i;

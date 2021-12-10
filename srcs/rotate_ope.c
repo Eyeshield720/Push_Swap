@@ -6,13 +6,13 @@
 /*   By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 01:20:52 by jmercier          #+#    #+#             */
-/*   Updated: 2021/04/26 05:27:29 by jmercier         ###   ########.fr       */
+/*   Updated: 2021/12/10 07:38:36 by jmercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pcswap.h>
 
-void		rotate_sta(t_stack *a)
+void	rotate_sta(t_stack *a)
 {
 	t_pile	*tmp;
 	t_pile	*tmp2;
@@ -28,7 +28,7 @@ void		rotate_sta(t_stack *a)
 	a->first = tmp2;
 }
 
-void		rotate_stb(t_stack *b)
+void	rotate_stb(t_stack *b)
 {
 	t_pile	*tmp;
 	t_pile	*tmp2;
@@ -44,7 +44,7 @@ void		rotate_stb(t_stack *b)
 	b->first = tmp2;
 }
 
-void		rev_rotate_sta(t_stack *a)
+void	rev_rotate_sta(t_stack *a)
 {
 	t_pile	*tmp;
 	t_pile	*tmp2;
@@ -60,7 +60,7 @@ void		rev_rotate_sta(t_stack *a)
 	a->first = tmp2;
 }
 
-void		rev_rotate_stb(t_stack *b)
+void	rev_rotate_stb(t_stack *b)
 {
 	t_pile	*tmp;
 	t_pile	*tmp2;

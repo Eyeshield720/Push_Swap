@@ -12,9 +12,10 @@
 
 #include <pcswap.h>
 
-t_pile		*ft_create_list(int nb, t_pile *face, int i)
+t_pile	*ft_create_list(int nb, t_pile *face, int i)
 {
-	if (!(face = (t_pile*)malloc(sizeof(t_pile))))
+	face = (t_pile *)malloc(sizeof(t_pile));
+	if (!face)
 		return (NULL);
 	face->nb = nb;
 	face->index = i;
@@ -22,7 +23,7 @@ t_pile		*ft_create_list(int nb, t_pile *face, int i)
 	return (face);
 }
 
-int			free_stack(t_stack *random)
+int	free_stack(t_stack *random)
 {
 	t_pile	*to_del;
 

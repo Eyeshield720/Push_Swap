@@ -6,7 +6,7 @@
 /*   By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/26 05:40:02 by jmercier          #+#    #+#             */
-/*   Updated: 2021/09/09 13:37:39 by jmercier         ###   ########.fr       */
+/*   Updated: 2021/12/10 08:22:29 by jmercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@
 # define ORA "\033[38;5;222m"
 # define LORA "\033[1m\033[38;5;222m"
 
-typedef struct		s_pile
+typedef struct s_pile
 {
 	int				nb;
 	int				index;
 	struct s_pile	*next;
 }					t_pile;
 
-typedef struct		s_opcmp
+typedef struct s_opcmp
 {
 	int				ra;
 	int				rb;
@@ -77,7 +77,7 @@ typedef struct		s_opcmp
 	unsigned short	fb_remain:12;
 }					t_opcmp;
 
-typedef struct		s_stack
+typedef struct s_stack
 {
 	int				len;
 	int				max;
@@ -104,6 +104,7 @@ void				begin_sort2(t_stack *a, t_stack *b);
 int					first_sort(t_stack *a, t_stack *b);
 int					second_sort(t_stack *a, t_stack *b);
 void				sort_3max(t_stack *a);
+void				if2max(t_stack *a, t_stack *b);
 void				manage_3max(t_stack *a, t_pile *tmp, int nb_tmp, int i);
 void				short_opesta(t_stack *a, t_stack *b);
 int					start_move(t_stack *a, t_stack *b);
@@ -163,10 +164,6 @@ int					ft_strcmp(const char *s1, const char *s2);
 
 t_pile				*ft_create_list(int nb, t_pile *pile, int i);
 int					free_stack(t_stack *random);
-
-char				*ft_strjoin(char const *s1, char const *s2);
-char				*ft_strnew(size_t size);
-char				*ft_strcpy(char *dest, char *src);
 int					get_next_line(int const fd, char **line);
 
 #endif

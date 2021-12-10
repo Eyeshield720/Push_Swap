@@ -6,7 +6,7 @@
 /*   By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 23:41:14 by jmercier          #+#    #+#             */
-/*   Updated: 2021/04/25 23:42:01 by jmercier         ###   ########.fr       */
+/*   Updated: 2021/12/10 08:21:13 by jmercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ static void	worth_swapping2(t_stack *a)
 	}
 }
 
-void		worth_swapping(t_stack *a)
+void	worth_swapping(t_stack *a)
 {
-	if (a->must.nb_ope > a->to_cmp.nb_ope ||
-	(a->must.nb_ope == a->to_cmp.nb_ope && a->must.value > a->to_cmp.value))
+	if (a->must.nb_ope > a->to_cmp.nb_ope || (a->must.nb_ope == a->to_cmp.nb_ope
+			&& a->must.value > a->to_cmp.value))
 	{
 		a->must.ra = a->to_cmp.ra;
 		a->must.rb = a->to_cmp.rb;
@@ -55,7 +55,7 @@ void		worth_swapping(t_stack *a)
 	}
 }
 
-void		reset_ope(t_stack *a)
+void	reset_ope(t_stack *a)
 {
 	a->must.ra = 0;
 	a->must.rb = 0;
@@ -69,7 +69,7 @@ void		reset_ope(t_stack *a)
 	a->to_cmp.ra = 0;
 }
 
-void		feel_worth_it(t_stack *a, t_stack *b)
+void	feel_worth_it(t_stack *a, t_stack *b)
 {
 	t_pile	*tmp;
 

@@ -6,13 +6,13 @@
 /*   By: jmercier <jmercier@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/25 23:39:40 by jmercier          #+#    #+#             */
-/*   Updated: 2021/04/25 23:40:09 by jmercier         ###   ########.fr       */
+/*   Updated: 2021/12/10 08:22:09 by jmercier         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <pcswap.h>
 
-void		find_maxb(t_stack *b, t_opcmp *op)
+void	find_maxb(t_stack *b, t_opcmp *op)
 {
 	t_pile	*tmp;
 
@@ -35,7 +35,7 @@ void		find_maxb(t_stack *b, t_opcmp *op)
 	}
 }
 
-void		rev_sortb(t_stack *a, t_stack *b)
+void	rev_sortb(t_stack *a, t_stack *b)
 {
 	find_maxb(b, &a->must);
 	if (a->must.ind < b->len / 2)
@@ -58,7 +58,7 @@ void		rev_sortb(t_stack *a, t_stack *b)
 	}
 }
 
-void		final_sort(t_stack *a, t_stack *b)
+void	final_sort(t_stack *a, t_stack *b)
 {
 	rev_sortb(a, b);
 	while (b->len > 0)
